@@ -29,3 +29,41 @@ h2 {
 #products {
   padding: 20px;
 }
+
+.category {
+  margin: 35px 15px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.product {
+  background: #151515;
+  border: 1px solid #b89535;
+  border-radius: 15px;
+  padding: 20px 10px;
+}
+
+.product h3 {
+  color: #fff;
+}
+
+.product p {
+  color: #d4af37;
+  font-weight: bold;
+}
+
+.product button {
+  background: #d4af37;
+  color: #080808;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
