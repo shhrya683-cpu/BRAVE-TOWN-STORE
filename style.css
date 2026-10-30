@@ -1,0 +1,31 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #080808;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+header {
+  padding: 45px 15px;
+  background: linear-gradient(135deg, #000, #30230b);
+  border-bottom: 2px solid #c9a33b;
+}
+
+h1 {
+  color: #d4af37;
+}
+
+h2 {
+  color: #d4af37;
+  margin-top: 35px;
+}
+
+#products {
+  padding: 20px;
+}
