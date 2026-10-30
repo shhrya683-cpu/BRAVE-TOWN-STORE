@@ -1,23 +1,557 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRAVE TOWN STORE</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#090909">
+  <title>BRAVE TOWN | المتجر الرسمي</title>
+
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f7df86;
+      --black: #090909;
+      --panel: #151515;
+      --text: #f5f5f5;
+      --muted: #b8b8b8;
+      --border: rgba(212, 175, 55, .3);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(ellipse at top, #25200f 0%, #090909 48%),
+        var(--black);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    header {
+      padding: 34px 18px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0, 0, 0, .45);
+    }
+
+    .crown {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      color: var(--gold);
+      font-size: clamp(27px, 6vw, 44px);
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      color: var(--muted);
+      margin: 12px 0 0;
+      line-height: 1.8;
+    }
+
+    .notice {
+      max-width: 950px;
+      margin: 22px auto 0;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(212, 175, 55, .07);
+      color: #f1e5bb;
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    main {
+      width: min(1100px, 92%);
+      margin: 35px auto;
+    }
+
+    .section-title {
+      color: var(--gold);
+      text-align: center;
+      font-size: 25px;
+      margin-bottom: 24px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .product {
+      background: linear-gradient(145deg, #191919, #101010);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 23px 18px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .22);
+      transition: transform .2s, border-color .2s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+    }
+
+    .product-icon {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .product h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+    }
+
+    .product p {
+      color: var(--muted);
+      min-height: 42px;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .price {
+      color: var(--gold-light);
+      font-size: 23px;
+      font-weight: bold;
+      margin: 16px 0;
+    }
+
+    .buy-button {
+      width: 100%;
+      border: none;
+      border-radius: 9px;
+      padding: 12px;
+      background: linear-gradient(100deg, #b68b18, #f3d66f);
+      color: #111;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+
+    .buy-button:hover {
+      opacity: .88;
+    }
+
+    .how-to {
+      margin-top: 35px;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      line-height: 2;
+    }
+
+    .how-to h2 {
+      color: var(--gold);
+      margin-top: 0;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 15px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* نافذة تفاصيل الطلب */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0, 0, 0, .82);
+      padding: 18px;
+      overflow-y: auto;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      position: relative;
+      width: min(500px, 100%);
+      background: #141414;
+      border: 1px solid var(--gold);
+      border-radius: 17px;
+      padding: 25px;
+      box-shadow: 0 0 35px rgba(212, 175, 55, .12);
+    }
+
+    .close {
+      position: absolute;
+      left: 15px;
+      top: 12px;
+      border: none;
+      background: transparent;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .modal-content h2 {
+      color: var(--gold);
+      margin-top: 8px;
+      padding-left: 25px;
+    }
+
+    .selected-product {
+      padding: 13px;
+      background: #202020;
+      border-radius: 10px;
+      margin: 18px 0;
+      line-height: 1.9;
+    }
+
+    .info-label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 16px 0 7px;
+    }
+
+    .copy-row {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .copy-value {
+      flex: 1;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      background: #090909;
+      border: 1px solid #383838;
+      border-radius: 8px;
+      padding: 11px;
+      direction: ltr;
+      text-align: left;
+      color: white;
+      font-size: 14px;
+    }
+
+    .small-button {
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--gold-light);
+      padding: 9px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .discord-button {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      background: #5865F2;
+      color: white;
+      border-radius: 9px;
+      padding: 12px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .warning {
+      font-size: 13px;
+      color: #d5d5d5;
+      line-height: 1.9;
+      margin-top: 17px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #202020;
+      border: 1px solid var(--gold);
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      display: none;
+      z-index: 2000;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      .modal-content {
+        padding: 20px 15px;
+      }
+
+      .copy-row {
+        flex-wrap: wrap;
+      }
+
+      .copy-value {
+        flex-basis: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <header>
-    <h1>👑 BRAVE TOWN</h1>
-    <p>المتجر الرسمي لبريف تاون</p>
+    <div class="crown">👑</div>
+    <h1>BRAVE TOWN</h1>
+    <p>المتجر الرسمي لسيرفر بريف تاون</p>
+    <p>خدمات السيرفر والماب بأسعار واضحة</p>
   </header>
 
   <main>
-    <h2>منتجات المتجر</h2>
-    <div id="products"></div>
+    <div class="notice">
+      أهلاً بك في متجر BRAVE TOWN<br>
+      اختر المنتج المناسب واضغط على زر الطلب لعرض تفاصيل الدفع والتواصل
+    </div>
+
+    <h2 class="section-title">🛒 منتجات السيرفر</h2>
+
+    <section class="products">
+      <article class="product">
+        <div class="product-icon">⚡</div>
+        <h3>تفعيل فوري</h3>
+        <p>خدمة التفعيل الفوري في السيرفر</p>
+        <div class="price">2.50 ريال</div>
+        <button class="buy-button"
+          onclick="openOrder('تفعيل فوري', '2.50 ريال')">
+          طلب المنتج
+        </button>
+      </article>
+
+      <article class="product">
+        <div class="product-icon">👑</div>
+        <h3>رتبة VIP</h3>
+        <p>رتبة VIP حسب مزايا السيرفر</p>
+        <div class="price">5 ريال</div>
+        <button class="buy-button"
+          onclick="openOrder('رتبة VIP', '5 ريال')">
+          طلب المنتج
+        </button>
+      </article>
+    </section>
+
+    <h2 class="section-title" style="margin-top: 38px;">🎮 منتجات الماب</h2>
+
+    <section class="products">
+      <article class="product">
+        <div class="product-icon">🔫</div>
+        <h3>سلاح خفيف</h3>
+        <p>شراء سلاح خفيف داخل الماب</p>
+        <div class="price">2.50 ريال</div>
+        <button class="buy-button"
+          onclick="openOrder('سلاح خفيف', '2.50 ريال')">
+          طلب المنتج
+        </button>
+      </article>
+
+      <article class="product">
+        <div class="product-icon">🛡️</div>
+        <h3>سلاح ثقيل</h3>
+        <p>شراء سلاح ثقيل داخل الماب</p>
+        <div class="price">7.50 ريال</div>
+        <button class="buy-button"
+          onclick="openOrder('سلاح ثقيل', '7.50 ريال')">
+          طلب المنتج
+        </button>
+      </article>
+
+      <article class="product">
+        <div class="product-icon">🏢</div>
+        <h3>مقر عصابة</h3>
+        <p>طلب مقر عصابة داخل الماب</p>
+        <div class="price">20 ريال</div>
+        <button class="buy-button"
+          onclick="openOrder('مقر عصابة', '20 ريال')">
+          طلب المنتج
+        </button>
+      </article>
+
+      <article class="product">
+        <div class="product-icon">🚔</div>
+        <h3>فتح قطاع عسكري</h3>
+        <p>طلب فتح قطاع عسكري داخل الماب</p>
+        <div class="price">17 ريال</div>
+        <button class="buy-button"
+          onclick="openOrder('فتح قطاع عسكري', '17 ريال')">
+          طلب المنتج
+        </button>
+      </article>
+    </section>
+
+    <section class="how-to">
+      <h2>📋 طريقة الطلب</h2>
+      <div>١- اختر المنتج الذي تريده</div>
+      <div>٢- اضغط على زر طلب المنتج</div>
+      <div>٣- انسخ معلومات الدفع الظاهرة في النافذة</div>
+      <div>٤- بعد إتمام الدفع تواصل مع حساب ديسكورد الموضح في النافذة</div>
+      <div>٥- أرسل إثبات الدفع واسم المنتج المطلوب</div>
+      <p style="color: #e6cc76;">
+        لا ترسل كلمة مرور حسابك لأي شخص لإتمام عملية الشراء
+      </p>
+    </section>
   </main>
 
-  <script src="script.js"></script>
+  <footer>
+    👑 BRAVE TOWN STORE<br>
+    جميع الحقوق محفوظة لسيرفر BRAVE TOWN
+  </footer>
+
+  <!-- نافذة الطلب -->
+  <div class="modal" id="orderModal" onclick="closeOnBackdrop(event)">
+    <div class="modal-content">
+      <button class="close" onclick="closeOrder()" aria-label="إغلاق">×</button>
+
+      <h2>تفاصيل الطلب</h2>
+
+      <div class="selected-product">
+        <div>المنتج: <strong id="productName"></strong></div>
+        <div>السعر: <strong id="productPrice" style="color: #f7df86;"></strong></div>
+      </div>
+
+      <span class="info-label">حساب التحويل البنكي</span>
+      <div class="copy-row">
+        <div class="copy-value" id="bankAccount"></div>
+        <button class="small-button" onclick="copyText('bankAccount')">
+          نسخ
+        </button>
+      </div>
+
+      <span class="info-label">اسم حساب ديسكورد</span>
+      <div class="copy-row">
+        <div class="copy-value" id="discordUsername"></div>
+        <button class="small-button" onclick="copyText('discordUsername')">
+          نسخ
+        </button>
+      </div>
+
+      <a class="discord-button"
+         id="discordLink"
+         href="https://discord.com/"
+         target="_blank"
+         rel="noopener noreferrer">
+        فتح ديسكورد
+      </a>
+
+      <div class="warning">
+        بعد التحويل، تواصل مع صاحب المتجر في ديسكورد وأرسل اسم المنتج وإثبات الدفع.
+        تأكد من صحة بيانات الدفع قبل إرسال أي مبلغ.
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">تم النسخ</div>
+
+  <script>
+    /*
+      عدّل معلومات المتجر هنا فقط.
+      انتبه: أي معلومات تضعها هنا ستكون ظاهرة لزوار الموقع.
+    */
+    const STORE = {
+      BANK_ACCOUNT: "ضع_رقم_الحساب_البنكي_هنا",
+      DISCORD_USERNAME: "bsi667",
+      DISCORD_USER_ID: ""
+    };
+
+    function openOrder(name, price) {
+      document.getElementById("productName").textContent = name;
+      document.getElementById("productPrice").textContent = price;
+      document.getElementById("bankAccount").textContent =
+        STORE.BANK_ACCOUNT;
+      document.getElementById("discordUsername").textContent =
+        STORE.DISCORD_USERNAME;
+
+      const discordLink = document.getElementById("discordLink");
+
+      if (STORE.DISCORD_USER_ID.trim() !== "") {
+        discordLink.href =
+          "https://discord.com/users/" +
+          encodeURIComponent(STORE.DISCORD_USER_ID.trim());
+      } else {
+        discordLink.href = "https://discord.com/";
+      }
+
+      document.getElementById("orderModal").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeOrder() {
+      document.getElementById("orderModal").classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    function closeOnBackdrop(event) {
+      if (event.target.id === "orderModal") {
+        closeOrder();
+      }
+    }
+
+    async function copyText(elementId) {
+      const text = document.getElementById(elementId).textContent;
+
+      if (!text || text.includes("ضع_")) {
+        showToast("أضف بيانات المتجر أولاً");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("تم النسخ بنجاح");
+      } catch (error) {
+        const field = document.createElement("textarea");
+        field.value = text;
+        document.body.appendChild(field);
+        field.select();
+
+        try {
+          document.execCommand("copy");
+          showToast("تم النسخ بنجاح");
+        } catch (copyError) {
+          showToast("حدد النص وانسخه يدويًا");
+        }
+
+        field.remove();
+      }
+    }
+
+    let toastTimer;
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        closeOrder();
+      }
+    });
+  </script>
 </body>
 </html>
