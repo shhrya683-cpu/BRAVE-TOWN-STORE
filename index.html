@@ -1,18 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10091d">
 <title>BRAVE TOWN STORE</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
 
 :root {
-  --gold: #e8c66a;
-  --purple: #8055c7;
-  --bg: #09090d;
-  --card: #15151d;
-  --muted: #a6a3b1;
+  --purple: #9147ff;
+  --light-purple: #c39aff;
+  --dark-purple: #54209c;
+  --bg: #09070f;
+  --card: #171020;
+  --muted: #aaa0b8;
 }
 
 * {
@@ -34,15 +38,16 @@ button, input {
 
 button {
   cursor: pointer;
+  transition: .2s;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 7%;
+  padding: 17px 7%;
   border-bottom: 1px solid #ffffff12;
-  background: #0d0d13;
+  background: #100b19;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -51,31 +56,30 @@ header {
 .logo {
   font-size: 21px;
   font-weight: 900;
-  color: var(--gold);
-  letter-spacing: 1px;
+  color: var(--light-purple);
 }
 
 .header-link {
   color: white;
   text-decoration: none;
   font-size: 13px;
-  border: 1px solid #ffffff25;
+  border: 1px solid #9147ff66;
   padding: 8px 14px;
   border-radius: 9px;
 }
 
 .hero {
   text-align: center;
-  padding: 85px 20px 65px;
+  padding: 85px 20px 75px;
   background:
-    radial-gradient(ellipse at top, #8055c733, transparent 65%),
-    linear-gradient(180deg, #14101f, var(--bg));
+    radial-gradient(ellipse at top, #9147ff55, transparent 65%),
+    linear-gradient(180deg, #1a1028, var(--bg));
 }
 
 .tag {
   display: inline-block;
-  border: 1px solid #e8c66a55;
-  color: var(--gold);
+  border: 1px solid #9147ff88;
+  color: var(--light-purple);
   padding: 6px 16px;
   border-radius: 30px;
   font-size: 12px;
@@ -89,7 +93,7 @@ header {
 }
 
 .hero h1 span {
-  color: var(--gold);
+  color: var(--light-purple);
 }
 
 .hero p {
@@ -101,18 +105,19 @@ header {
 }
 
 .main-btn {
-  background: linear-gradient(120deg, #e8c66a, #b58b37);
-  color: #17120a;
+  background: linear-gradient(120deg, #b77aff, #7134d5);
+  color: white;
   border: none;
   padding: 13px 28px;
   border-radius: 12px;
   font-weight: 900;
   font-size: 15px;
-  box-shadow: 0 5px 25px #e8c66a22;
+  box-shadow: 0 5px 25px #9147ff44;
 }
 
 .main-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px #9147ff66;
 }
 
 .features {
@@ -139,7 +144,7 @@ header {
 
 .feature h3 {
   font-size: 13px;
-  color: var(--gold);
+  color: var(--light-purple);
 }
 
 .feature p {
@@ -150,7 +155,7 @@ header {
 
 #productsSection {
   display: none;
-  padding: 20px 7% 65px;
+  padding: 25px 7% 65px;
   max-width: 1200px;
   margin: auto;
 }
@@ -161,14 +166,22 @@ header {
 }
 
 .section-title h2 {
-  color: var(--gold);
-  font-size: 27px;
+  color: var(--light-purple);
+  font-size: 28px;
 }
 
 .section-title p {
   color: var(--muted);
   font-size: 13px;
   margin-top: 5px;
+}
+
+.category-title {
+  color: var(--light-purple);
+  font-size: 20px;
+  margin: 30px 0 15px;
+  border-right: 3px solid var(--purple);
+  padding-right: 12px;
 }
 
 .tools {
@@ -181,7 +194,7 @@ header {
 #search {
   flex: 1;
   min-width: 180px;
-  background: #15151d;
+  background: #171020;
   color: white;
   border: 1px solid #ffffff20;
   padding: 12px 15px;
@@ -189,8 +202,12 @@ header {
   outline: none;
 }
 
+#search:focus {
+  border-color: var(--purple);
+}
+
 .cart-button {
-  background: #8055c7;
+  background: #7838d2;
   color: white;
   border: none;
   border-radius: 10px;
@@ -205,20 +222,21 @@ header {
 }
 
 .product {
-  background: linear-gradient(145deg, #191923, #101016);
+  background: linear-gradient(145deg, #21172f, #110d19);
   border: 1px solid #ffffff12;
   border-radius: 16px;
   padding: 22px;
-  transition: .2s;
+  transition: .25s;
 }
 
 .product:hover {
-  border-color: #e8c66a88;
-  transform: translateY(-4px);
+  border-color: var(--purple);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px #9147ff22;
 }
 
 .product-icon {
-  font-size: 35px;
+  font-size: 38px;
   margin-bottom: 12px;
 }
 
@@ -231,11 +249,12 @@ header {
   color: var(--muted);
   font-size: 12px;
   min-height: 38px;
+  line-height: 1.8;
 }
 
 .price {
-  color: var(--gold);
-  font-size: 21px;
+  color: var(--light-purple);
+  font-size: 22px;
   font-weight: 900;
   margin: 15px 0;
 }
@@ -243,28 +262,35 @@ header {
 .buy-btn {
   width: 100%;
   border: none;
-  background: #8055c7;
+  background: #7838d2;
   color: white;
-  padding: 10px;
+  padding: 11px;
   border-radius: 9px;
   font-weight: 800;
 }
 
 .buy-btn:hover {
-  background: #986ee0;
+  background: #a066ed;
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 20px;
+  grid-column: 1 / -1;
 }
 
 .contact {
   margin: 30px 7%;
   padding: 35px 20px;
   text-align: center;
-  background: linear-gradient(130deg, #171421, #17131e);
-  border: 1px solid #8055c744;
+  background: linear-gradient(130deg, #1c1428, #171020);
+  border: 1px solid #9147ff66;
   border-radius: 18px;
 }
 
 .contact h2 {
-  color: var(--gold);
+  color: var(--light-purple);
   margin-bottom: 10px;
 }
 
@@ -284,7 +310,7 @@ header {
 
 .account {
   background: #ffffff0b;
-  border: 1px solid #ffffff20;
+  border: 1px solid #9147ff66;
   border-radius: 10px;
   padding: 10px 18px;
   color: white;
@@ -293,13 +319,17 @@ header {
 
 .support-btn {
   display: inline-block;
-  background: #5865f2;
+  background: #7838d2;
   color: white;
   text-decoration: none;
   padding: 11px 22px;
   border-radius: 10px;
   font-weight: 800;
   margin-top: 10px;
+}
+
+.support-btn:hover {
+  background: #9659ed;
 }
 
 footer {
@@ -322,17 +352,18 @@ footer {
 }
 
 .modal-box {
-  background: #171720;
-  border: 1px solid #e8c66a55;
+  background: #171220;
+  border: 1px solid #9147ff88;
   border-radius: 18px;
   width: 100%;
   max-width: 420px;
   padding: 25px;
   text-align: center;
+  box-shadow: 0 10px 50px #0009;
 }
 
 .modal-box h2 {
-  color: var(--gold);
+  color: var(--light-purple);
   margin-bottom: 12px;
 }
 
@@ -362,15 +393,30 @@ footer {
 
 .welcome-box {
   background:
-    radial-gradient(ellipse at top, #8055c744, transparent 70%),
-    #15151d;
+    radial-gradient(ellipse at top, #9147ff55, transparent 70%),
+    #15101e;
 }
 
 .welcome-logo {
-  color: var(--gold);
+  color: var(--light-purple);
   font-size: 35px;
   font-weight: 900;
   margin-bottom: 12px;
+}
+
+.cart-line {
+  padding: 12px;
+  border-bottom: 1px solid #ffffff18;
+  line-height: 2;
+}
+
+.cart-line button {
+  margin-right: 8px;
+  background: #7838d2;
+  color: white;
+  border: 0;
+  padding: 5px 10px;
+  border-radius: 6px;
 }
 
 @media(max-width:600px) {
@@ -388,7 +434,7 @@ footer {
 
 <header>
   <div class="logo">👑 BRAVE TOWN</div>
-  <a class="header-link" href="https://discord.gg/bt-1" target="_blank">الدعم الفني</a>
+  <a class="header-link" href="https://discord.gg/bt-1" target="_blank" rel="noopener">الدعم الفني</a>
 </header>
 
 <section class="hero">
@@ -432,17 +478,23 @@ footer {
     <button class="cart-button" onclick="openCart()">🛒 السلة (<span id="cartCount">0</span>)</button>
   </div>
 
-  <div class="products" id="products"></div>
+  <h3 class="category-title">🛍️ أغراض السيرفر</h3>
+  <div class="products" id="serverProducts"></div>
+
+  <h3 class="category-title">🎮 أغراض الماب</h3>
+  <div class="products" id="mapProducts"></div>
 </section>
 
 <section class="contact">
   <h2>تحتاج إلى مساعدة؟</h2>
   <p>للطلب أو الاستفسار تواصل معنا عبر حسابات الديسكورد أو ادخل سيرفرنا الرسمي</p>
+
   <div class="accounts">
     <div class="account">bsi667</div>
     <div class="account">.os1.</div>
   </div>
-  <a class="support-btn" href="https://discord.gg/bt-1" target="_blank">
+
+  <a class="support-btn" href="https://discord.gg/bt-1" target="_blank" rel="noopener">
     🎧 طلب الدعم عبر Discord
   </a>
 </section>
@@ -465,7 +517,7 @@ footer {
     <h2>تأكيد طلبك</h2>
     <p id="orderText"></p>
     <p>لإكمال الطلب تواصل معنا عبر سيرفر BRAVE TOWN</p>
-    <a class="support-btn" href="https://discord.gg/bt-1" target="_blank">الدخول إلى سيرفر الدعم</a>
+    <a class="support-btn" href="https://discord.gg/bt-1" target="_blank" rel="noopener">الدخول إلى سيرفر الدعم</a>
     <button class="close-btn" onclick="closeModal('orderModal')">إغلاق</button>
   </div>
 </div>
@@ -474,7 +526,7 @@ footer {
   <div class="modal-box">
     <h2>🛒 سلة مشترياتك</h2>
     <div id="cartItems"></div>
-    <h3 id="cartTotal" style="color:#e8c66a;margin:15px"></h3>
+    <h3 id="cartTotal" style="color:#c39aff;margin:15px"></h3>
     <button class="main-btn" onclick="checkoutCart()">إرسال الطلب</button>
     <br>
     <button class="close-btn" onclick="closeModal('cartModal')">إغلاق</button>
@@ -483,11 +535,54 @@ footer {
 
 <script>
 const productList = [
-  {id:1, name:"تفعيل فوري", description:"طلب تفعيل فوري في السيرفر", price:1, icon:"⚡"},
-  {id:2, name:"رتبة VIP", description:"احصل على رتبة VIP في السيرفر", price:1, icon:"👑"},
-  {id:3, name:"سلاح خفيف", description:"طلب سلاح خفيف للماب", price:1.5, icon:"🔫"},
-  {id:4, name:"سلاح ثقيل", description:"طلب سلاح ثقيل للماب", price:2, icon:"🛡️"},
-  {id:5, name:"مقر شرطة أو عصابة", description:"طلب مقر خاص للماب", price:5, icon:"🏢"}
+  {
+    id: 1,
+    name: "تفعيل فوري",
+    category: "server",
+    description: "طلب تفعيل فوري في السيرفر",
+    price: 2.50,
+    icon: "⚡"
+  },
+  {
+    id: 2,
+    name: "رتبة VIP",
+    category: "server",
+    description: "احصل على رتبة VIP في السيرفر",
+    price: 5,
+    icon: "👑"
+  },
+  {
+    id: 3,
+    name: "سلاح خفيف",
+    category: "map",
+    description: "طلب سلاح خفيف للماب",
+    price: 2.50,
+    icon: "🔫"
+  },
+  {
+    id: 4,
+    name: "سلاح ثقيل",
+    category: "map",
+    description: "طلب سلاح ثقيل للماب",
+    price: 7.50,
+    icon: "🛡️"
+  },
+  {
+    id: 5,
+    name: "مقر عصابة",
+    category: "map",
+    description: "طلب مقر عصابة خاص للماب",
+    price: 20,
+    icon: "🏢"
+  },
+  {
+    id: 6,
+    name: "فتح قطاع عسكري",
+    category: "map",
+    description: "طلب فتح قطاع عسكري في الماب",
+    price: 17,
+    icon: "🎖️"
+  }
 ];
 
 let cart = [];
@@ -495,7 +590,7 @@ let cart = [];
 function showProducts() {
   const section = document.getElementById("productsSection");
   section.style.display = "block";
-  section.scrollIntoView({behavior:"smooth"});
+  section.scrollIntoView({ behavior: "smooth" });
 }
 
 function closeWelcome() {
@@ -506,49 +601,63 @@ function closeModal(id) {
   document.getElementById(id).style.display = "none";
 }
 
-function renderProducts(items = productList) {
-  const container = document.getElementById("products");
-
-  if (!items.length) {
-    container.innerHTML = "<p>لم يتم العثور على منتجات</p>";
-    return;
-  }
-
-  container.innerHTML = items.map(product => `
+function productCard(product) {
+  return `
     <div class="product">
       <div class="product-icon">${product.icon}</div>
       <h3>${product.name}</h3>
       <p>${product.description}</p>
       <div class="price">${product.price.toFixed(2).replace(/0+$/,'').replace(/\.$/,'')} ريال</div>
-      <button class="buy-btn" onclick="addToCart(${product.id})">إضافة إلى السلة</button>
+      <button class="buy-btn" onclick="addToCart(${product.id})">
+        إضافة إلى السلة
+      </button>
     </div>
-  `).join("");
+  `;
+}
+
+function renderProducts(items = productList) {
+  const server = items.filter(p => p.category === "server");
+  const map = items.filter(p => p.category === "map");
+
+  document.getElementById("serverProducts").innerHTML =
+    server.length ? server.map(productCard).join("") :
+    '<p class="empty">لا توجد منتجات مطابقة</p>';
+
+  document.getElementById("mapProducts").innerHTML =
+    map.length ? map.map(productCard).join("") :
+    '<p class="empty">لا توجد منتجات مطابقة</p>';
 }
 
 function searchProducts() {
-  const value = document.getElementById("search").value.trim();
-  const filtered = productList.filter(p => p.name.includes(value));
+  const value = document.getElementById("search").value.trim().toLowerCase();
+  const filtered = productList.filter(p =>
+    p.name.toLowerCase().includes(value)
+  );
   renderProducts(filtered);
 }
 
 function addToCart(id) {
   const product = productList.find(p => p.id === id);
+  if (!product) return;
+
   const existing = cart.find(p => p.id === id);
 
   if (existing) {
     existing.quantity++;
   } else {
-    cart.push({...product, quantity:1});
+    cart.push({ ...product, quantity: 1 });
   }
 
   updateCart();
+
   document.getElementById("orderText").textContent =
     `تمت إضافة ${product.name} إلى سلتك بنجاح`;
+
   document.getElementById("orderModal").style.display = "flex";
 }
 
 function updateCart() {
-  const count = cart.reduce((sum,p) => sum + p.quantity, 0);
+  const count = cart.reduce((sum, p) => sum + p.quantity, 0);
   document.getElementById("cartCount").textContent = count;
 }
 
@@ -556,23 +665,21 @@ function openCart() {
   const items = document.getElementById("cartItems");
 
   if (!cart.length) {
-    items.innerHTML = "<p>السلة فارغة حالياً</p>";
+    items.innerHTML = '<p>السلة فارغة حالياً</p>';
     document.getElementById("cartTotal").textContent = "";
   } else {
     items.innerHTML = cart.map(p => `
-      <div style="padding:10px;border-bottom:1px solid #ffffff22">
+      <div class="cart-line">
         ${p.name} × ${p.quantity}
         <br>
-        <span style="color:#e8c66a">${(p.price*p.quantity).toFixed(2)} ريال</span>
-        <button onclick="removeFromCart(${p.id})"
-          style="margin-right:10px;background:#a33;color:white;border:0;padding:5px 10px;border-radius:6px">
-          حذف
-        </button>
+        <span style="color:#c39aff">${(p.price * p.quantity).toFixed(2)} ريال</span>
+        <button onclick="removeFromCart(${p.id})">حذف</button>
       </div>
     `).join("");
 
-    const total = cart.reduce((sum,p) => sum + p.price*p.quantity, 0);
-    document.getElementById("cartTotal").textContent = `الإجمالي: ${total.toFixed(2)} ريال`;
+    const total = cart.reduce((sum, p) => sum + p.price * p.quantity, 0);
+    document.getElementById("cartTotal").textContent =
+      `الإجمالي: ${total.toFixed(2)} ريال`;
   }
 
   document.getElementById("cartModal").style.display = "flex";
@@ -587,10 +694,15 @@ function removeFromCart(id) {
 function checkoutCart() {
   if (!cart.length) return;
 
-  const summary = cart.map(p => `${p.name} × ${p.quantity}`).join(" - ");
+  const summary = cart.map(p =>
+    `${p.name} × ${p.quantity}`
+  ).join(" - ");
+
   document.getElementById("cartModal").style.display = "none";
+
   document.getElementById("orderText").textContent =
     `طلبك: ${summary}. تواصل معنا عبر سيرفر الديسكورد لإكمال الطلب`;
+
   document.getElementById("orderModal").style.display = "flex";
 }
 
